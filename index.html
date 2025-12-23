@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Nexus Manager</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --accent: #00E676;
+            --text-main: #FFFFFF;
+            --text-dim: #888888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header { 
+            padding: 20px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(18, 18, 18, 0.95); 
+            position: sticky; 
+            top: 0; 
+            backdrop-filter: blur(10px); 
+            z-index: 100; 
+            border-bottom: 1px solid #333; 
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-main); letter-spacing: 1px; }
+        .logo span { color: var(--accent); }
+        
+        .nav-links a { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            margin-left: 30px; 
+            font-weight: 500; 
+            transition: color 0.3s; 
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        .hero { 
+            height: 90vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 0 20px; 
+            background: radial-gradient(circle at center, #1a1a1a 0%, #121212 70%); 
+        }
+        .hero h1 { 
+            font-size: 4.5rem; 
+            margin-bottom: 20px; 
+            background: linear-gradient(to right, #fff, #888); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            animation: fadeIn 1.5s ease-out;
+        }
+        .hero p { 
+            font-size: 1.3rem; 
+            color: var(--text-dim); 
+            max-width: 650px; 
+            margin-bottom: 40px; 
+            animation: fadeIn 2s ease-out;
+        }
+        
+        /* Download Button */
+        .btn-download {
+            background: linear-gradient(45deg, var(--accent), #00C853);
+            color: #000; 
+            padding: 18px 50px; 
+            border-radius: 50px;
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.2rem;
+            transition: transform 0.2s, box-shadow 0.2s; 
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+            animation: bounceIn 1s;
+            cursor: pointer;
+        }
+        .btn-download:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 40px rgba(0, 230, 118, 0.6); 
+        }
+
+        /* Features Grid */
+        .features { padding: 100px 50px; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 3rem; margin-bottom: 80px; }
+        .section-title span { color: var(--accent); }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 40px; 
+        }
+        
+        .card { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 1px solid #333; 
+            transition: transform 0.3s, border-color 0.3s; 
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--accent); 
+        }
+        
+        .card h3 { margin-bottom: 15px; font-size: 1.5rem; }
+        .card p { color: var(--text-dim); font-size: 1rem; }
+        .icon { font-size: 3rem; margin-bottom: 20px; }
+
+        /* Footer */
+        footer { 
+            text-align: center; 
+            padding: 40px; 
+            background: #0a0a0a; 
+            color: var(--text-dim); 
+            margin-top: 50px; 
+            border-top: 1px solid #333; 
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounceIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        @media (max-width: 768px) { 
+            .hero h1 { font-size: 3rem; } 
+            header { padding: 20px; } 
+            .nav-links { display: none; } 
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">NEXUS <span>MANAGER</span></div>
+        <nav class="nav-links">
+            <a href="#features">Advantages</a>
+            <a href="#download-btn">Download</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Organize. Optimize. Play.</h1>
+        <p>The next-generation launcher with fluid animations, game boosting technology, and seamless cloud sync.</p>
+        
+        <a href="#" class="btn-download" id="download-btn">Loading Version...</a>
+        
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #555;">Windows 10/11 • 64-bit • Auto-Updater Included</p>
+    </section>
+
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose <span>Nexus</span>?</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div class="icon">✨</div>
+                <h3>Fluid Animations</h3>
+                <p>Experience a buttery-smooth interface. Every click, hover, and transition is animated for a premium feel.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h3>Game Booster</h3>
+                <p>Maximize your FPS. Nexus automatically minimizes and clears RAM whenever you launch a game.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📂</div>
+                <h3>Smart Organization</h3>
+                <p>Create unlimited Workspaces and Tabs. Drag & Drop files directly to add them instantly.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">☁️</div>
+                <h3>Cloud Sync</h3>
+                <p>Your setup follows you. Log in on any PC, and your apps, stats, and categories sync automatically.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3>Usage Statistics</h3>
+                <p>Know your habits. Track play counts and "Last Played" dates for every single app.</p>
+            </div>
+
+             <div class="card">
+                <div class="icon">🎨</div>
+                <h3>Full Customization</h3>
+                <p>Make it yours with the Theme Engine. Choose from OLED Black, Cyberpunk, Snow White, and more.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Nexus Manager. Built for Speed.</p>
+    </footer>
+
+    <script>
+        // --- EDIT THESE TWO LINES ---
+        const githubUsername = "Monke123123xsxxx";
+        const repoName = "nexus-manager";
+        const exeName = "Nexus Manager.exe"; // Keep this EXACTLY as you name it in the Release
+        // -----------------------------
+
+        async function updateDownloadLink() {
+            const btn = document.getElementById('download-btn');
+            
+            try {
+                // 1. Fetch the version.json file to get the version number
+                // We add ?t=... to prevent browser caching so users always see new versions
+                const response = await fetch('version.json?t=' + new Date().getTime());
+                
+                if (!response.ok) throw new Error("Version file missing");
+                
+                const data = await response.json();
+                const version = data.version;
+
+                // 2. Update the button text
+                btn.textContent = `Download v${version}`;
+                
+                // 3. Update the link to point to the "latest" release on GitHub
+                // This URL structure always grabs the file from the newest release
+                btn.href = `https://github.com/${githubUsername}/${repoName}/releases/latest/download/${exeName}`;
+                
+            } catch (error) {
+                console.error("Error fetching version:", error);
+                btn.textContent = "Download Nexus Manager";
+                // Fallback link to the releases page if something breaks
+                btn.href = `https://github.com/${githubUsername}/${repoName}/releases/latest`;
+            }
+        }
+
+        // Run on load
+        updateDownloadLink();
+    </script>
+
+</body>
+</html>
