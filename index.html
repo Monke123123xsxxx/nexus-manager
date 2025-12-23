@@ -210,38 +210,36 @@
         <p>&copy; 2025 Nexus Manager. Built for Speed.</p>
     </footer>
 
-    <script>
+<script>
         // --- EDIT THESE TWO LINES ---
         const githubUsername = "Monke123123xsxxx";
         const repoName = "nexus-manager";
-        const exeName = "Nexus.Manager.exe"; // Keep this EXACTLY as you name it in the Release
+        const exeName = "Nexus.Manager.exe";
         // -----------------------------
 
         async function updateDownloadLink() {
             const btn = document.getElementById('download-btn');
             
+            // 1. Define the direct download URL
+            // This 'magic link' always grabs the file from the release marked "Latest"
+            const directUrl = `https://github.com/${githubUsername}/${repoName}/releases/latest/download/${exeName}`;
+
+            // 2. Set the button to download the EXE immediately (default state)
+            btn.href = directUrl;
+
             try {
-                // 1. Fetch the version.json file to get the version number
-                // We add ?t=... to prevent browser caching so users always see new versions
+                // 3. Try to fetch the version number just for the button text
                 const response = await fetch('version.json?t=' + new Date().getTime());
                 
                 if (!response.ok) throw new Error("Version file missing");
                 
                 const data = await response.json();
-                const version = data.version;
-
-                // 2. Update the button text
-                btn.textContent = `Download v${version}`;
-                
-                // 3. Update the link to point to the "latest" release on GitHub
-                // This URL structure always grabs the file from the newest release
-                btn.href = `https://github.com/${githubUsername}/${repoName}/releases/latest/download/${exeName}`;
+                btn.textContent = `Download v${data.version}`;
                 
             } catch (error) {
-                console.error("Error fetching version:", error);
+                console.log("Could not fetch version number, keeping default button text.");
+                // We do NOT change the href here, so it stays as the direct EXE download
                 btn.textContent = "Download Nexus Manager";
-                // Fallback link to the releases page if something breaks
-                btn.href = `https://github.com/${githubUsername}/${repoName}/releases/latest`;
             }
         }
 
