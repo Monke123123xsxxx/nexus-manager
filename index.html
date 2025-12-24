@@ -3,260 +3,368 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Manager | Organize. Optimize. Play.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Nexus Manager | The Ultimate Game Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
         :root {
-            --bg-dark: #080808;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --bg-dark: #050505;
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
             --accent: #00E676;
-            --accent-glow: rgba(0, 230, 118, 0.3);
-            --text-main: #f5f5f7;
-            --text-dim: #a1a1a6;
+            --accent-glow: rgba(0, 230, 118, 0.15);
+            --text-main: #ffffff;
+            --text-dim: #888888;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             background-color: var(--bg-dark); 
             color: var(--text-main); 
-            line-height: 1.5; 
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center 0;
         }
 
-        /* Ambient Background Glows */
-        .glow-top {
+        /* Typography */
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+
+        /* Ambient Glows */
+        .spotlight {
             position: absolute;
-            top: -10%;
+            top: -200px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 230, 118, 0.08) 0%, transparent 70%);
+            width: 80vw;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
+            opacity: 0.6;
         }
 
-        /* Header Navigation */
-        header { 
-            padding: 24px 8%; 
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 8%;
+            position: relative;
+            z-index: 10;
+        }
+        .logo { 
+            font-weight: 700; 
+            font-size: 1.25rem; 
             display: flex; 
-            justify-content: space-between; 
             align-items: center; 
-            background: rgba(8, 8, 8, 0.8); 
-            position: sticky; 
-            top: 0; 
-            backdrop-filter: blur(20px); 
-            z-index: 1000; 
-            border-bottom: 1px solid var(--glass-border); 
+            gap: 10px;
         }
-        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; }
-        .logo span { color: var(--accent); }
+        .logo i { color: var(--accent); }
         
-        .nav-links a { 
-            color: var(--text-dim); 
-            text-decoration: none; 
-            margin-left: 35px; 
-            font-size: 0.9rem;
-            font-weight: 500; 
-            transition: color 0.3s; 
+        .links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 40px;
+            font-size: 0.95rem;
+            transition: 0.3s;
         }
-        .nav-links a:hover { color: var(--accent); }
+        .links a:hover { color: #fff; }
 
         /* Hero Section */
-        .hero { 
-            height: 95vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            padding: 0 20px;
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
             position: relative;
+            z-index: 5;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .hero h1 { 
-            font-size: clamp(3rem, 8vw, 5.5rem); 
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px; 
-            letter-spacing: -2px;
-            background: linear-gradient(to bottom, #fff 40%, #555); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 230, 118, 0.2);
+            animation: fadeIn 1s ease;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .hero p { 
-            font-size: 1.25rem; 
-            color: var(--text-dim); 
-            max-width: 600px; 
-            margin-bottom: 50px; 
-            font-weight: 400;
-            animation: slideUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            line-height: 1;
+            font-weight: 700;
+            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            animation: slideUp 0.8s ease forwards;
         }
-        
-        /* Download Button Styling */
-        .btn-container { animation: slideUp 1.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .btn-download {
-            background: var(--text-main);
-            color: #000; 
-            padding: 20px 48px; 
+
+        .hero p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            max-width: 580px;
+            margin: 0 auto 50px;
+            animation: slideUp 1s ease forwards;
+        }
+
+        /* Buttons */
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: slideUp 1.2s ease forwards;
+        }
+
+        .btn {
+            padding: 16px 36px;
             border-radius: 12px;
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 1.1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-            display: inline-block;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .btn-download:hover { 
-            transform: translateY(-4px); 
+
+        .btn-primary {
+            background: var(--text-main);
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
             background: var(--accent);
-            box-shadow: 0 15px 40px var(--accent-glow); 
+            box-shadow: 0 0 40px var(--accent-glow);
         }
 
-        /* Features Section */
-        .features { padding: 120px 8%; max-width: 1400px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 100px; }
-        .section-header h2 { font-size: 3rem; letter-spacing: -1px; margin-bottom: 10px; }
-        .section-header p { color: var(--text-dim); font-size: 1.1rem; }
+        /* Trust Bar */
+        .trust-bar {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            opacity: 0.5;
+            flex-wrap: wrap;
+            animation: slideUp 1.4s ease forwards;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #fff;
+        }
 
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 24px; 
+        /* Features Grid */
+        .features {
+            max-width: 1300px;
+            margin: 100px auto;
+            padding: 0 20px;
         }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+            opacity: 0; 
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mouse Follow Glow Effect */
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: var(--y);
+            left: var(--x);
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.15), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .feature-card:hover::before { opacity: 1; }
         
-        .card { 
-            background: var(--glass-bg); 
-            padding: 40px; 
-            border-radius: 24px; 
-            border: 1px solid var(--glass-border); 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            backdrop-filter: blur(5px);
-        }
-        .card:hover { 
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2); 
-            transform: translateY(-8px) scale(1.02); 
-        }
-        
-        .card .icon { 
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
+        .feature-card:hover { border-color: rgba(0, 230, 118, 0.3); }
+
+        .f-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 12px;
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            border: 1px solid var(--glass-border);
+            margin-bottom: 24px;
+            color: var(--accent);
+            border: 1px solid var(--border);
         }
 
-        .card h3 { margin-bottom: 12px; font-size: 1.4rem; font-weight: 600; }
-        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 12px; color: #fff; }
+        .feature-card p { color: var(--text-dim); line-height: 1.6; font-size: 1rem; }
 
-        /* Footer */
-        footer { 
-            text-align: center; 
-            padding: 60px 20px; 
-            border-top: 1px solid var(--glass-border); 
+        footer {
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 60px;
             color: var(--text-dim);
-            font-size: 0.9rem;
+            margin-top: 100px;
         }
 
-        /* Advanced Animations */
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(40px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        /* Animations */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @media (max-width: 768px) { 
-            header { padding: 20px 5%; }
-            .hero h1 { font-size: 3.2rem; }
-            .nav-links { display: none; }
-            .features { padding: 80px 5%; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .links { display: none; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow-top"></div>
+    <div class="spotlight"></div>
 
-    <header>
-        <div class="logo">NEXUS <span>MANAGER</span></div>
-        <nav class="nav-links">
+    <nav>
+        <div class="logo">
+            <i data-lucide="zap"></i> NEXUS
+        </div>
+        <div class="links">
             <a href="#features">Features</a>
-            <a href="#download-btn">Download</a>
-        </nav>
-    </header>
+            <a href="#download">Version 5.8</a>
+        </div>
+    </nav>
 
-    <section class="hero">
-        <h1>Organize. Optimize.<br>Play Harder.</h1>
-        <p>The premium desktop hub for organized gamers. Optimized performance, seamless cloud sync, and a buttery-smooth interface.</p>
+    <div class="hero">
+        <div class="badge"><i data-lucide="sparkles" size="14"></i> NEW: Steam Cover Art & VDF Parsing</div>
+        <h1>Your Entire Library.<br>One Beautiful Place.</h1>
+        <p>The open-source game manager that organizes, optimizes, and broadcasts your gaming life. No bloat, just speed.</p>
         
-        <div class="btn-container">
-            <a href="#" class="btn-download" id="download-btn">Checking Version...</a>
+        <div class="cta-group">
+            <a href="#" class="btn btn-primary" id="download-btn">
+                <i data-lucide="download"></i> Download Now
+            </a>
         </div>
-        
-        <div style="margin-top: 30px; display: flex; gap: 20px; font-size: 0.85rem; color: var(--text-dim);">
-            <span>✓ Windows 10/11</span>
-            <span>✓ Low Latency</span>
-            <span>✓ Free Updates</span>
-        </div>
-    </section>
+    </div>
+
+    <div class="trust-bar">
+        <div class="trust-item"><i data-lucide="gamepad-2"></i> Steam Integration</div>
+        <div class="trust-item"><i data-lucide="message-square"></i> Discord RPC</div>
+        <div class="trust-item"><i data-lucide="cloud"></i> Cloud Sync</div>
+        <div class="trust-item"><i data-lucide="cpu"></i> RAM Booster</div>
+    </div>
 
     <section class="features" id="features">
-        <div class="section-header">
-            <h2>Experience <span>Nexus</span></h2>
-            <p>Everything you need for a clutter-free gaming setup.</p>
-        </div>
-        
         <div class="grid">
-            <div class="card">
-                <div class="icon">✨</div>
-                <h3>Motion Design</h3>
-                <p>Built with fluidity in mind. Every interaction is engineered with micro-animations to provide a tactile, high-end software experience.</p>
+            
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="image"></i></div>
+                <h3>Visual Library</h3>
+                <p>Nexus automatically scans your drives for games and fetches high-quality cover art from Steam's servers. Say goodbye to ugly icons.</p>
             </div>
 
-            <div class="card">
-                <div class="icon">⚡</div>
-                <h3>Instant Boost</h3>
-                <p>One-click optimization. Nexus aggressively manages background processes and RAM the moment you hit "Launch."</p>
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="activity"></i></div>
+                <h3>Social Presence</h3>
+                <p>Fully integrated with Discord. Show friends exactly what you're playing, how long you've been in-game, and even let them join you.</p>
             </div>
 
-            <div class="card">
-                <div class="icon">📁</div>
-                <h3>Dynamic Workspaces</h3>
-                <p>Organize your library your way. Switch between customized workspaces and drag-and-drop games with zero friction.</p>
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="zap"></i></div>
+                <h3>Game Booster</h3>
+                <p>Smart process management automatically clears RAM and suspends background tasks when you launch a game for maximum FPS.</p>
             </div>
 
-            <div class="card">
-                <div class="icon">☁️</div>
-                <h3>Nexus Cloud Sync</h3>
-                <p>Your library is immortal. Sign in from any location to instantly restore your categories, time tracking, and preferences.</p>
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="cloud-lightning"></i></div>
+                <h3>Cloud Sync</h3>
+                <p>Switch computers without losing your setup. Your categories, play history, and preferences sync securely via Firebase.</p>
             </div>
 
-            <div class="card">
-                <div class="icon">📊</div>
-                <h3>Insights Engine</h3>
-                <p>Understand your gaming habits. Precise time tracking and play frequency metrics are stored securely in the cloud.</p>
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="search"></i></div>
+                <h3>Deep Scan</h3>
+                <p>Our VDF Parser finds Steam games on any drive (C:, D:, E:) instantly. It even detects games that aren't currently installed.</p>
             </div>
 
-             <div class="card">
-                <div class="icon">🎨</div>
-                <h3>OLED-Ready Themes</h3>
-                <p>Choose from professional dark modes, high-contrast Cyberpunk palettes, or minimalist white-out designs.</p>
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="layout-grid"></i></div>
+                <h3>System Tray</h3>
+                <p>Nexus minimizes quietly to the tray, keeping your status active and your desktop clean while you play.</p>
             </div>
+
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Nexus Manager. Built for the modern gamer.</p>
+        <p>© 2025 Nexus Manager. Open Source & Ad-Free.</p>
     </footer>
 
     <script>
+        // 1. Initialize Icons
+        lucide.createIcons();
+
+        // 2. Mouse Follow Glow Effect
+        const cards = document.querySelectorAll('.feature-card');
+        document.querySelector('.features').onmousemove = e => {
+            for(const card of cards) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            }
+        };
+
+        // 3. Scroll Animation (Fade In)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card').forEach((el) => observer.observe(el));
+
+        // 4. Download Link Logic
         const githubUsername = "Monke123123xsxxx";
         const repoName = "nexus-manager";
         const exeName = "Nexus.Manager.exe";
@@ -267,19 +375,17 @@
             btn.href = directUrl;
 
             try {
-                // Fetch the version from the root of your repo
                 const response = await fetch('version.json?t=' + new Date().getTime());
-                if (!response.ok) throw new Error("Version file missing");
-                
-                const data = await response.json();
-                btn.textContent = `Download v${data.version}`;
-            } catch (error) {
-                btn.textContent = "Download Nexus Manager";
+                if (response.ok) {
+                    const data = await response.json();
+                    btn.innerHTML = `<i data-lucide="download"></i> Download v${data.version}`;
+                    lucide.createIcons(); // Re-render icon
+                }
+            } catch (e) {
+                console.log("Version check skipped");
             }
         }
-
         updateDownloadLink();
     </script>
-
 </body>
 </html>
