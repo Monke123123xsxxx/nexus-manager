@@ -3,45 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Nexus Manager</title>
+    <title>Nexus Manager | Organize. Optimize. Play.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1E1E1E;
+            --bg-dark: #080808;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
             --accent: #00E676;
-            --text-main: #FFFFFF;
-            --text-dim: #888888;
+            --accent-glow: rgba(0, 230, 118, 0.3);
+            --text-main: #f5f5f7;
+            --text-dim: #a1a1a6;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
         body { 
-            background-color: var(--bg-color); 
+            background-color: var(--bg-dark); 
             color: var(--text-main); 
-            line-height: 1.6; 
+            line-height: 1.5; 
             overflow-x: hidden;
         }
 
-        /* Header */
+        /* Ambient Background Glows */
+        .glow-top {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header Navigation */
         header { 
-            padding: 20px 50px; 
+            padding: 24px 8%; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            background: rgba(18, 18, 18, 0.95); 
+            background: rgba(8, 8, 8, 0.8); 
             position: sticky; 
             top: 0; 
-            backdrop-filter: blur(10px); 
-            z-index: 100; 
-            border-bottom: 1px solid #333; 
+            backdrop-filter: blur(20px); 
+            z-index: 1000; 
+            border-bottom: 1px solid var(--glass-border); 
         }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-main); letter-spacing: 1px; }
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; }
         .logo span { color: var(--accent); }
         
         .nav-links a { 
-            color: var(--text-main); 
+            color: var(--text-dim); 
             text-decoration: none; 
-            margin-left: 30px; 
+            margin-left: 35px; 
+            font-size: 0.9rem;
             font-weight: 500; 
             transition: color 0.3s; 
         }
@@ -49,204 +66,223 @@
 
         /* Hero Section */
         .hero { 
-            height: 90vh; 
+            height: 95vh; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
             align-items: center; 
             text-align: center; 
-            padding: 0 20px; 
-            background: radial-gradient(circle at center, #1a1a1a 0%, #121212 70%); 
+            padding: 0 20px;
+            position: relative;
         }
         .hero h1 { 
-            font-size: 4.5rem; 
-            margin-bottom: 20px; 
-            background: linear-gradient(to right, #fff, #888); 
+            font-size: clamp(3rem, 8vw, 5.5rem); 
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px; 
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff 40%, #555); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            animation: fadeIn 1.5s ease-out;
+            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .hero p { 
-            font-size: 1.3rem; 
+            font-size: 1.25rem; 
             color: var(--text-dim); 
-            max-width: 650px; 
-            margin-bottom: 40px; 
-            animation: fadeIn 2s ease-out;
+            max-width: 600px; 
+            margin-bottom: 50px; 
+            font-weight: 400;
+            animation: slideUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
-        /* Download Button */
+        /* Download Button Styling */
+        .btn-container { animation: slideUp 1.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .btn-download {
-            background: linear-gradient(45deg, var(--accent), #00C853);
+            background: var(--text-main);
             color: #000; 
-            padding: 18px 50px; 
-            border-radius: 50px;
+            padding: 20px 48px; 
+            border-radius: 12px;
             text-decoration: none; 
-            font-weight: bold; 
-            font-size: 1.2rem;
-            transition: transform 0.2s, box-shadow 0.2s; 
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
-            animation: bounceIn 1s;
-            cursor: pointer;
+            font-weight: 600; 
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            display: inline-block;
         }
         .btn-download:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 0 40px rgba(0, 230, 118, 0.6); 
+            transform: translateY(-4px); 
+            background: var(--accent);
+            box-shadow: 0 15px 40px var(--accent-glow); 
         }
 
-        /* Features Grid */
-        .features { padding: 100px 50px; max-width: 1400px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 3rem; margin-bottom: 80px; }
-        .section-title span { color: var(--accent); }
+        /* Features Section */
+        .features { padding: 120px 8%; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 100px; }
+        .section-header h2 { font-size: 3rem; letter-spacing: -1px; margin-bottom: 10px; }
+        .section-header p { color: var(--text-dim); font-size: 1.1rem; }
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 40px; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 24px; 
         }
         
         .card { 
-            background: var(--card-bg); 
+            background: var(--glass-bg); 
             padding: 40px; 
-            border-radius: 20px; 
-            border: 1px solid #333; 
-            transition: transform 0.3s, border-color 0.3s; 
-            position: relative;
-            overflow: hidden;
+            border-radius: 24px; 
+            border: 1px solid var(--glass-border); 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            backdrop-filter: blur(5px);
         }
         .card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--accent); 
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2); 
+            transform: translateY(-8px) scale(1.02); 
         }
         
-        .card h3 { margin-bottom: 15px; font-size: 1.5rem; }
-        .card p { color: var(--text-dim); font-size: 1rem; }
-        .icon { font-size: 3rem; margin-bottom: 20px; }
+        .card .icon { 
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .card h3 { margin-bottom: 12px; font-size: 1.4rem; font-weight: 600; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; }
 
         /* Footer */
         footer { 
             text-align: center; 
-            padding: 40px; 
-            background: #0a0a0a; 
-            color: var(--text-dim); 
-            margin-top: 50px; 
-            border-top: 1px solid #333; 
+            padding: 60px 20px; 
+            border-top: 1px solid var(--glass-border); 
+            color: var(--text-dim);
+            font-size: 0.9rem;
         }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounceIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        /* Advanced Animations */
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(40px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
         @media (max-width: 768px) { 
-            .hero h1 { font-size: 3rem; } 
-            header { padding: 20px; } 
-            .nav-links { display: none; } 
-            .grid { grid-template-columns: 1fr; }
+            header { padding: 20px 5%; }
+            .hero h1 { font-size: 3.2rem; }
+            .nav-links { display: none; }
+            .features { padding: 80px 5%; }
         }
     </style>
 </head>
 <body>
 
+    <div class="glow-top"></div>
+
     <header>
         <div class="logo">NEXUS <span>MANAGER</span></div>
         <nav class="nav-links">
-            <a href="#features">Advantages</a>
+            <a href="#features">Features</a>
+            <a href="https://github.com/Monke123123xsxxx/nexus-manager" target="_blank">Open Source</a>
             <a href="#download-btn">Download</a>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>Organize. Optimize. Play.</h1>
-        <p>The next-generation launcher with fluid animations, game boosting technology, and seamless cloud sync.</p>
+        <h1>Organize. Optimize.<br>Play Harder.</h1>
+        <p>The premium desktop hub for organized gamers. Optimized performance, seamless cloud sync, and a buttery-smooth interface.</p>
         
-        <a href="#" class="btn-download" id="download-btn">Loading Version...</a>
+        <div class="btn-container">
+            <a href="#" class="btn-download" id="download-btn">Checking Version...</a>
+        </div>
         
-        <p style="margin-top: 20px; font-size: 0.9rem; color: #555;">Windows 10/11 • 64-bit • Auto-Updater Included</p>
+        <div style="margin-top: 30px; display: flex; gap: 20px; font-size: 0.85rem; color: var(--text-dim);">
+            <span>✓ Windows 10/11</span>
+            <span>✓ Low Latency</span>
+            <span>✓ Free Updates</span>
+        </div>
     </section>
 
     <section class="features" id="features">
-        <h2 class="section-title">Why Choose <span>Nexus</span>?</h2>
+        <div class="section-header">
+            <h2>Experience <span>Nexus</span></h2>
+            <p>Everything you need for a clutter-free gaming setup.</p>
+        </div>
+        
         <div class="grid">
             
             <div class="card">
                 <div class="icon">✨</div>
-                <h3>Fluid Animations</h3>
-                <p>Experience a buttery-smooth interface. Every click, hover, and transition is animated for a premium feel.</p>
+                <h3>Motion Design</h3>
+                <p>Built with fluidity in mind. Every interaction is engineered with micro-animations to provide a tactile, high-end software experience.</p>
             </div>
 
             <div class="card">
                 <div class="icon">⚡</div>
-                <h3>Game Booster</h3>
-                <p>Maximize your FPS. Nexus automatically minimizes and clears RAM whenever you launch a game.</p>
+                <h3>Instant Boost</h3>
+                <p>One-click optimization. Nexus aggressively manages background processes and RAM the moment you hit "Launch."</p>
             </div>
 
             <div class="card">
-                <div class="icon">📂</div>
-                <h3>Smart Organization</h3>
-                <p>Create unlimited Workspaces and Tabs. Drag & Drop files directly to add them instantly.</p>
+                <div class="icon">📁</div>
+                <h3>Dynamic Workspaces</h3>
+                <p>Organize your library your way. Switch between customized workspaces and drag-and-drop games with zero friction.</p>
             </div>
 
             <div class="card">
                 <div class="icon">☁️</div>
-                <h3>Cloud Sync</h3>
-                <p>Your setup follows you. Log in on any PC, and your apps, stats, and categories sync automatically.</p>
+                <h3>Nexus Cloud Sync</h3>
+                <p>Your library is immortal. Sign in from any location to instantly restore your categories, time tracking, and preferences.</p>
             </div>
 
             <div class="card">
                 <div class="icon">📊</div>
-                <h3>Usage Statistics</h3>
-                <p>Know your habits. Track play counts and "Last Played" dates for every single app.</p>
+                <h3>Insights Engine</h3>
+                <p>Understand your gaming habits. Precise time tracking and play frequency metrics are stored securely in the cloud.</p>
             </div>
 
              <div class="card">
                 <div class="icon">🎨</div>
-                <h3>Full Customization</h3>
-                <p>Make it yours with the Theme Engine. Choose from OLED Black, Cyberpunk, Snow White, and more.</p>
+                <h3>OLED-Ready Themes</h3>
+                <p>Choose from professional dark modes, high-contrast Cyberpunk palettes, or minimalist white-out designs.</p>
             </div>
 
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Nexus Manager. Built for Speed.</p>
+        <p>&copy; 2025 Nexus Manager. Built for the modern gamer.</p>
     </footer>
 
-<script>
-        // --- EDIT THESE TWO LINES ---
+    <script>
         const githubUsername = "Monke123123xsxxx";
         const repoName = "nexus-manager";
         const exeName = "Nexus.Manager.exe";
-        // -----------------------------
 
         async function updateDownloadLink() {
             const btn = document.getElementById('download-btn');
-            
-            // 1. Define the direct download URL
-            // This 'magic link' always grabs the file from the release marked "Latest"
             const directUrl = `https://github.com/${githubUsername}/${repoName}/releases/latest/download/${exeName}`;
-
-            // 2. Set the button to download the EXE immediately (default state)
             btn.href = directUrl;
 
             try {
-                // 3. Try to fetch the version number just for the button text
+                // Fetch the version from the root of your repo
                 const response = await fetch('version.json?t=' + new Date().getTime());
-                
                 if (!response.ok) throw new Error("Version file missing");
                 
                 const data = await response.json();
                 btn.textContent = `Download v${data.version}`;
-                
             } catch (error) {
-                console.log("Could not fetch version number, keeping default button text.");
-                // We do NOT change the href here, so it stays as the direct EXE download
                 btn.textContent = "Download Nexus Manager";
             }
         }
 
-        // Run on load
         updateDownloadLink();
     </script>
 
 </body>
-
 </html>
