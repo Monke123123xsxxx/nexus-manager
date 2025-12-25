@@ -14,6 +14,7 @@
             --border: rgba(255, 255, 255, 0.08);
             --accent: #00E676;
             --accent-glow: rgba(0, 230, 118, 0.25);
+            --warning: #ffab40;
             --text-main: #ffffff;
             --text-dim: #888888;
         }
@@ -131,7 +132,7 @@
             color: var(--text-dim);
             font-size: 1.2rem;
             max-width: 580px;
-            margin: 0 auto 50px;
+            margin: 0 auto 30px; /* Reduced margin to fit warning */
         }
 
         .typing-text::after, .scroll-type::after {
@@ -145,7 +146,7 @@
         
         @keyframes blink { 50% { opacity: 0; } }
 
-        .cta-group { display: flex; gap: 20px; justify-content: center; }
+        .cta-group { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; }
 
         .btn {
             padding: 16px 36px;
@@ -181,6 +182,19 @@
             background: var(--accent);
             box-shadow: 0 0 40px var(--accent-glow);
         }
+
+        /* WARNING BOX */
+        .warning-text {
+            color: var(--warning);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+        .warning-text:hover { opacity: 1; }
 
         .trust-bar {
             margin-top: 60px;
@@ -433,7 +447,7 @@
             <a href="#features">Features</a>
             <a href="#timeline">Timeline</a>
             <a href="#faq">FAQ</a>
-            <a href="#download">Version 6.9</a>
+            <a href="#download">Version 7.5</a>
         </div>
     </nav>
 
@@ -446,6 +460,11 @@
             <a href="#" class="btn btn-primary" id="download-btn">
                 <i data-lucide="download"></i> Download Now
             </a>
+        </div>
+        
+        <div class="warning-text">
+            <i data-lucide="alert-circle" size="16"></i>
+            <span>Note: If the Icon/Discord Status doesn't sync, please select a Theme in Settings.</span>
         </div>
     </div>
 
@@ -466,7 +485,7 @@
             <div style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">Input Latency</div>
         </div>
         <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: 800; color: #fff;">v6.9</div>
+            <div style="font-size: 2.5rem; font-weight: 800; color: #fff;">v7.5</div>
             <div style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">Latest Build</div>
         </div>
     </div>
@@ -513,7 +532,7 @@
         
         <div class="timeline-container">
             <div class="timeline-item">
-                <div class="timeline-ver">v6.9 (CURRENT)</div>
+                <div class="timeline-ver">v7.5 (CURRENT)</div>
                 <div class="timeline-title">Live Connectivity</div>
                 <div class="timeline-desc">Instant Discord RPC updates, theme-aware taskbar icons, and a stabilized passive detection engine.</div>
             </div>
@@ -712,7 +731,7 @@
                 const response = await fetch('version.json?t=' + new Date().getTime());
                 if (response.ok) {
                     const data = await response.json();
-                    btn.innerHTML = `<i data-lucide="download"></i> Download v${data.version}`;
+                    btn.innerHTML = `<i data-lucide=\"download\"></i> Download v${data.version}`;
                     lucide.createIcons(); 
                 }
             } catch (e) { console.log("Version check skipped"); }
